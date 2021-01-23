@@ -1,3 +1,5 @@
+![Project screenshot](/screen.png?raw=true)
+
 ## Getting Started
 
 ### Prerequisites
