@@ -1,4 +1,9 @@
+## About The Project
+
+The project was created to display an animated live view of the earth, from a either GEOS-16 or GEOS-17 satellite imagery. Originally desgined to run on SBCs like rasberryPi or librePC, no web browser is needed and it can be configured to use very minimal CPU and memory resources.
+
 ![Project screenshot](/screen.png?raw=true)
+
 
 ## Getting Started
 
