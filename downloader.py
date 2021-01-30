@@ -46,17 +46,23 @@ def get_last_downloaded_image_timestamp():
 
 
 def get_online_file_url_list():
-    page = requests.get(DATA_URL).text
-    soup = BeautifulSoup(page, 'html.parser')
-    url_list = [
-        DATA_URL + node.get('href')
-        for node in soup.find_all('a')
-        if node.get('href').endswith(LINK_MATCH_STR)
-    ]
-    logger.debug('Found ' +
-                 str(len(url_list)) +
-                 ' images availalble for download.')
-    return url_list
+    page = None
+    try:
+        page = requests.get(DATA_URL).text
+    except Exception as err:
+        logger.error('Data query failed: {0}'.format(err))
+        return []
+    else:
+        soup = BeautifulSoup(page, 'html.parser')
+        url_list = [
+           DATA_URL + node.get('href')
+           for node in soup.find_all('a')
+           if node.get('href').endswith(LINK_MATCH_STR)
+        ]
+        logger.debug('Found ' +
+                     str(len(url_list)) +
+                     ' images availalble for download.')
+        return url_list
 
 
 def get_timestamp_from_file_url(file_url):
