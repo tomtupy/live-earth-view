@@ -26,7 +26,8 @@ config.read(CONFIG_FILE)
 IMAGE_SIZE = config['common']['ImageSize']
 IMAGE_FORMAT = config['common']['ImageFormat']
 IMAGE_DATA_LOCATION = config['common']['ImageDataLocation']
-LINK_MATCH_STR = 'GOES17-ABI-pnw-GEOCOLOR-' + IMAGE_SIZE + IMAGE_FORMAT
+DATA_FILE_LINK_PREFIX = config['downloader']['DataFileLinkPrefix']
+LINK_MATCH_STR = DATA_FILE_LINK_PREFIX + IMAGE_SIZE + IMAGE_FORMAT
 DELETE_OLD_DATA = config.getboolean('downloader', 'DeleteOldData')
 KEEP_MOST_RECENT_IMAGE = config.getboolean(
     'downloader', 'SkipMostRecentImageCleanup'
@@ -116,8 +117,7 @@ while True:
         image_file_list = get_image_file_list(
             IMAGE_DATA_LOCATION, IMAGE_FORMAT
         )
-        for image_filename in image_file_list[:-1]
-        if KEEP_MOST_RECENT_IMAGE else image_file_list:
+        for image_filename in image_file_list[:-1] if KEEP_MOST_RECENT_IMAGE else image_file_list:
             timestamp = get_timestamp_from_file_path(image_filename)
             if (timestamp >= oldest_timestamp):
                 break
