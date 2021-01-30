@@ -128,7 +128,7 @@ ani = animation.FuncAnimation(
     get_frame,
     init_func=render_init,
     interval=FRAME_INTERVAL_MSEC,
-    blit=True,
+    blit=False,
     repeat_delay=0
 )
 
