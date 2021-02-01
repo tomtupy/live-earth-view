@@ -33,6 +33,16 @@ def get_current_utc_timestamp(preceeding_minutes=0):
     return int(dt_now.strftime('%Y%j%H%M'))
 
 
+def get_image_list_within_window(display_window_mins, image_location, image_format):
+    oldest_allowable_timestamp = get_current_utc_timestamp(display_window_mins)
+    return [
+        image_file for image_file in
+        get_image_file_list(image_location, image_format)
+        if get_timestamp_from_file_path(image_file) >=
+        oldest_allowable_timestamp
+    ]
+
+
 def parse_image_dimension_str(dim_str):
     return [int(dim) for dim in dim_str.split('x')]
 
